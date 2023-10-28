@@ -1,17 +1,18 @@
-const User = require('../models/User');
+//const User = require('../models/User');
   
-exports.getAllUsers = async (req, res) => {
-    try {
+exports.getAllProfiles = async (req, res) => {
+    /*try {
         const users = await User.find();
         res.json(users);
     } catch (error) {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
-    }
+    }*/
+    res.status(200).send('Profiles. TODO');
 };
 
-exports.getUserById = async (req, res) => {
-    try {
+exports.getProfileById = async (req, res) => {
+    /*try {
         const user = await User.findById(req.params.id);
         if (!user) {
             res.status(404).send('Пользователь не найден');
@@ -21,6 +22,7 @@ exports.getUserById = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
-    }
+    }*/
+    res.status(200).send('Profiles. TODO');
 };
   

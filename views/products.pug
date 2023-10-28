@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Products
+        link(rel='stylesheet', type='text/css', href='/css/styles.css')
+    body
+        #navbar
+            button(onclick="location.href='/'") MAIN
+            button(onclick="location.href='/products'") PRODUCTS
+            button(onclick="location.href='/profile'") PROFILE
+        h1 Products
+        pre
+            each product in products
+                p
+                    | Name: #{product.name}
+                    | Desc: #{product.description}

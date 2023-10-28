@@ -1,4 +1,5 @@
 //const User = require('../models/User');
+const path = require('path');
   
 exports.getAllProfiles = async (req, res) => {
     /*try {
@@ -8,7 +9,8 @@ exports.getAllProfiles = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.send('Profiles. TODO');
+    //res.send('Profiles. TODO');
+    res.sendFile(path.join(__dirname, '../views/profile.html'));
 };
 
 exports.getProfileById = async (req, res) => {
@@ -23,6 +25,7 @@ exports.getProfileById = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.send('Profiles. TODO');
+    //res.send('Profiles. TODO');
+    res.sendFile(path.join(__dirname, '../views/profile.html'));
 };
   

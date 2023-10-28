@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const path = require('path');
 
 exports.getAllProducts = async (req, res) => {
     /*try {
@@ -8,7 +9,8 @@ exports.getAllProducts = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.send('Products page.TODO');
+    //res.send('Products page.TODO');
+    res.sendFile(path.join(__dirname, '../views/products.html'));
 };
 
 exports.getProductById = async (req, res) => {
@@ -23,5 +25,6 @@ exports.getProductById = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.send('Products page.TODO');
+    //res.send('Products page.TODO');
+    res.sendFile(path.join(__dirname, '../views/products.html'));
 };

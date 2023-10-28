@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const pug = require('pug');
 
 const port = process.env.PORT || 3000;
 const app = express();
 
 mongoose.connect('mongodb+srv://alex:0000@sandboxcluster.wh0wned.mongodb.net/?retryWrites=true&w=majority');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 const mainRoutes = require('./routes/mainRoutes');
 const productsRoutes = require('./routes/productsRoutes');

@@ -1,30 +1,20 @@
 const Product = require('../models/Product');
-const path = require('path');
 
 exports.getAllProducts = async (req, res) => {
-    /*try {
-        const products = await Product.find();
-        res.json(products);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Ошибка при получении данных');
-    }*/
-    //res.send('Products page.TODO');
-    res.sendFile(path.join(__dirname, '../views/products.html'));
+    try {
+        const products = await Product.find(); 
+        const mockProducts = [
+            { name: 'Product 1', description: 'Description 1' },
+            { name: 'Product 2', description: 'Description 2' },
+            { name: 'Product 3', description: 'Description 3' },
+          ];
+        res.render('products', { products: mockProducts });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 };
 
 exports.getProductById = async (req, res) => {
-    /*try {
-        const product = await Product.findById(req.params.id);
-        if (!product) {
-            res.status(404).send('Продукт не найден');
-        } else {
-            res.json(product);
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Ошибка при получении данных');
-    }*/
-    //res.send('Products page.TODO');
-    res.sendFile(path.join(__dirname, '../views/products.html'));
+    res.status(500).send('Server Error. Not implemented');
 };

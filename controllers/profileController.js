@@ -8,7 +8,7 @@ exports.getAllProfiles = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.status(200).send('Profiles. TODO');
+    res.send('Profiles. TODO');
 };
 
 exports.getProfileById = async (req, res) => {
@@ -23,6 +23,6 @@ exports.getProfileById = async (req, res) => {
         console.error(error);
         res.status(500).send('Ошибка при получении данных');
     }*/
-    res.status(200).send('Profiles. TODO');
+    res.send('Profiles. TODO');
 };
   

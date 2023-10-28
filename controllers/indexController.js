@@ -1,4 +1,4 @@
 exports.index = (req, res) => {
-    res.send('Главная страница');
+    res.send('Main page.TODO');
 };
  

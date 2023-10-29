@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title Products
+        link(rel='stylesheet', type='text/css', href='/css/styles.css')
+    body
+        #navbar
+            button(onclick="location.href='/'") MAIN
+            button(onclick="location.href='/products'") PRODUCTS
+            button(onclick="redirectToProfile()") PROFILE
+        form#filter-form
+            //label(for="filter-select") Filtre:
+            //select#filter-select
+                option(value="all") All
+                option(value="category1") 1 category
+                option(value="category2") 2 category
+                option(value="category3") 3 category
+            label(for="search-input") Search:
+            input#search-input(type="text", placeholder="Find by name")
+            button#search-button(type="button", onclick="clickFind()") Find
+        h1= message 
+    script.
+        function clickFind() {
+            //const filterSelect = document.getElementById('filter-select');
+            //const filter = filterSelect.options[filterSelect.selectedIndex].value;
+            const name = document.getElementById('search-input').value;
+            //location.href = `/products/find?filter=${filter}&name=${name}`;
+            location.href = `/products/find?name=${name}`;
+        }

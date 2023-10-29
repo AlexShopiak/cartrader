@@ -9,22 +9,23 @@ html
             button(onclick="location.href='/'") MAIN
             button(onclick="location.href='/products'") PRODUCTS
             button(onclick="location.href='/profile'") PROFILE
+        h1 Log in to your account
         .center-container
             .login-container 
                 .inputs
                     input(type="text", placeholder="Name", id="name")
                     input(type="password", placeholder="Password", id="pass")
                 .buttons
-                    button#submit-button(type="button", onclick="clickSignup()") Sign up
                     button#submit-button(type="button", onclick="clickLogin()") Log in
+                    button#submit-button(type="button", onclick="clickSignup()") Sign up
     script.
         function clickLogin() {
             const name = document.getElementById("name").value;
             const pass = document.getElementById("pass").value;
-            location.href = `/profile`;
+            location.href = `/profile/login`;
         }
         function clickSignup() {
             const name = document.getElementById("name").value;
             const pass = document.getElementById("pass").value;
-            location.href = `/profile`;
+            location.href = `/profile/signup`;
         }

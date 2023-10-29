@@ -28,5 +28,5 @@ html
             const filterSelect = document.getElementById('filter-select');
             const filter = filterSelect.options[filterSelect.selectedIndex].value;
             const name = document.getElementById('search-input').value;
-            location.href = `/profile?filter=${filter}&name=${name}`;
+            location.href = `/products/find?filter=${filter}&name=${name}`;
         }

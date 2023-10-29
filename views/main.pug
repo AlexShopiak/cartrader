@@ -2,10 +2,29 @@ doctype html
 html
     head
         title Main
-        link(rel='stylesheet', type='text/css', href='/css/styles.css')
+        link(rel='stylesheet', type='text/css', href='/css/basic.css')
+        link(rel='stylesheet', type='text/css', href='/css/login-container.css')
     body
         #navbar
             button(onclick="location.href='/'") MAIN
             button(onclick="location.href='/products'") PRODUCTS
             button(onclick="location.href='/profile'") PROFILE
-        h1 Main
+        .center-container
+            .login-container 
+                .inputs
+                    input(type="text", placeholder="Name", id="name")
+                    input(type="password", placeholder="Password", id="pass")
+                .buttons
+                    button#submit-button(type="button", onclick="clickSignup()") Sign up
+                    button#submit-button(type="button", onclick="clickLogin()") Log in
+    script.
+        function clickLogin() {
+            const name = document.getElementById("name").value;
+            const pass = document.getElementById("pass").value;
+            location.href = `/profile`;
+        }
+        function clickSignup() {
+            const name = document.getElementById("name").value;
+            const pass = document.getElementById("pass").value;
+            location.href = `/profile`;
+        }

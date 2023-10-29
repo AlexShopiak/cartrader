@@ -6,12 +6,12 @@
 }
 
 .login-container {
-    background-color: #f2f2f2;
+    background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-
     text-align: center;
+    box-shadow: 0 0 15px #ccc;
 }
 
 .inputs {
@@ -38,12 +38,12 @@ input {
     padding: 10px;
     margin: 10px 5px;
     border: none;
-    background-color: #0074d9;
+    background-color: #008CBA;
     color: #fff;
     border-radius: 3px;
     cursor: pointer;
 }
   
 #submit-button:hover {
-    background-color: #0056b3;
+    background-color: #004d67;
 }

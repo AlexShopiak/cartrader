@@ -1,31 +1,75 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    margin: 20px 0;
+#navbar {
+    background-color: #008CBA;
+    overflow: hidden;
 }
 
-button {
+#navbar button {
     background-color: #008CBA;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
     border: none;
-    cursor: pointer;
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-button:hover {
-    background-color: #005F7D;
+#navbar button:hover {
+    background-color: #004d67;
 }
 
-#navigation {
+h1 {
+    text-align: center;
+}
+
+#filter-form {
+    text-align: center;
+    margin: 20px auto;
+    width: 70%;
+}
+  
+label {
+    font-weight: bold;
+}
+  
+#filter-select, #search-input, #search-button {
+    margin: 10px;
+    padding: 5px;
+}
+  
+#product-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 квадрата в ряд */
+    grid-gap: 20px; /* Расстояние между квадратами */
+    margin: 20px auto;
+    width: 90%;
+}
+  
+.product {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #ccc;
+    padding: 10px;
+    text-align: center;
+}
+  
+.product img {
+    max-width: 100%;
+}
+  
+.product h2 {
     margin: 10px 0;
 }
-
-#navigation button {
-    margin: 10px;
+  
+.product p {
+    margin: 10px 0;
 }

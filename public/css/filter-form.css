@@ -1,0 +1,14 @@
+#filter-form {
+    text-align: center;
+    margin: 20px auto;
+    width: 70%;
+}
+  
+label {
+    font-weight: bold;
+}
+  
+#filter-select, #search-input, #search-button {
+    margin: 10px;
+    padding: 5px;
+}

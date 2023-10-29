@@ -1,20 +1,36 @@
 const Product = require('../models/Product');
 
-exports.getAllProducts = async (req, res) => {
+getAllProducts = async (req, res) => {
     try {
         const products = await Product.find(); 
-        const mockProducts = [
-            { name: 'Product 1', description: 'Description 1' },
-            { name: 'Product 2', description: 'Description 2' },
-            { name: 'Product 3', description: 'Description 3' },
-          ];
-        res.render('products', { products: mockProducts });
+        if (!products) {
+            res.render('products', { products: [] });
+        }
+        res.render('products', { products: Array.isArray(products) ? products : [products] });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
 };
 
-exports.getProductById = async (req, res) => {
-    res.status(500).send('Server Error. Not implemented');
-};
+getProductByName = async (req, res) => {
+    if (!req.query.name) {
+        return getAllProducts(req, res);
+    }
+    try {
+        const products = await Product.findOne({name:req.query.name});
+        if (!products) {
+            res.render('products', { products: [] });
+        }
+        console.log(products)
+        res.render('products', { products: Array.isArray(products) ? products : [products] });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+}; 
+
+module.exports = {
+    getAllProducts,
+    getProductByName,
+}

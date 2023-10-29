@@ -21,7 +21,7 @@ getProductByName = async (req, res) => {
     try {
         const products = await Product.findOne({name:productName});
         if (!products) {
-            res.render('products_empty', {message: `No products with the name: ${productName}`});
+            return res.render('products_empty', {message: `No products with the name: ${productName}`});
         }
         console.log(products)
         res.render('products', { products: Array.isArray(products) ? products : [products] });

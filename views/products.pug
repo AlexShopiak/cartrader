@@ -7,10 +7,26 @@ html
         #navbar
             button(onclick="location.href='/'") MAIN
             button(onclick="location.href='/products'") PRODUCTS
-            button(onclick="location.href='/profile'") PROFILE
-        h1 Products
-        pre
+            button(onclick="redirectToProfile()") PROFILE
+        form#filter-form
+            label(for="filter-select") Filtre:
+            select#filter-select
+                option(value="all") All
+                option(value="category1") 1 category
+                option(value="category2") 2 category
+                option(value="category3") 3 category
+            label(for="search-input") Search:
+            input#search-input(type="text", placeholder="Find by name")
+            button#search-button(type="button", onclick="clickFind()") Find
+        #product-container
             each product in products
-                p
-                    | Name: #{product.name}
-                    | Desc: #{product.description}
+                .product
+                    h2= product.name
+                    p= product.description
+    script.
+        function clickFind() {
+            const filterSelect = document.getElementById('filter-select');
+            const filter = filterSelect.options[filterSelect.selectedIndex].value;
+            const name = document.getElementById('search-input').value;
+            location.href = `/profile?filter=${filter}&name=${name}`;
+        }

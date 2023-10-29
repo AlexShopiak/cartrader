@@ -14,13 +14,14 @@ getAllProducts = async (req, res) => {
 };
 
 getProductByName = async (req, res) => {
-    if (!req.query.name) {
+    const productName = req.query.name;
+    if (!productName) {
         return getAllProducts(req, res);
     }
     try {
-        const products = await Product.findOne({name:req.query.name});
+        const products = await Product.findOne({name:productName});
         if (!products) {
-            res.render('products', { products: [] });
+            res.render('products_empty', {message: `No products with the name: ${productName}`});
         }
         console.log(products)
         res.render('products', { products: Array.isArray(products) ? products : [products] });
@@ -32,5 +33,5 @@ getProductByName = async (req, res) => {
 
 module.exports = {
     getAllProducts,
-    getProductByName,
+    getProductByName
 }

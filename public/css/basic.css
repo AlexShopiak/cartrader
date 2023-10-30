@@ -5,10 +5,6 @@ body {
     padding: 0;
 }
 
-h1 {
-    text-align: center;
-}
-
 #navbar {
     background-color: #008CBA;
     overflow: hidden;
@@ -22,10 +18,13 @@ h1 {
     display: block;
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none;
     font-size: 16px;
 }
 
 #navbar button:hover {
     background-color: #004d67;
+}
+
+h1 {
+    text-align: center;
 }

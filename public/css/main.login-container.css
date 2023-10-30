@@ -1,11 +1,10 @@
-.center-container {
+.login-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 20px auto;
+    margin: 20px;
 }
 
-.login-container {
+.login-box {
     background-color: white;
     padding: 20px;
     border: 1px solid #ccc;
@@ -21,9 +20,8 @@
 }
 
 input {
-    width: 100%;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }

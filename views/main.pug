@@ -3,15 +3,15 @@ html
     head
         title Main
         link(rel='stylesheet', type='text/css', href='/css/basic.css')
-        link(rel='stylesheet', type='text/css', href='/css/login-container.css')
+        link(rel='stylesheet', type='text/css', href='/css/main.login-container.css')
     body
         #navbar
             button(onclick="location.href='/'") MAIN
             button(onclick="location.href='/products'") PRODUCTS
             button(onclick="location.href='/profile'") PROFILE
         h1 Log in to your account
-        .center-container
-            .login-container 
+        .login-container
+            .login-box
                 .inputs
                     input(type="text", placeholder="Name", id="name")
                     input(type="password", placeholder="Password", id="pass")

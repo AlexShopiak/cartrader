@@ -18,5 +18,6 @@ html
                         input(name = "password"  type="password", required placeholder="Password")
                     .buttons
                         button#submit-button(type="Submit") Sign up
+                a(href="/auth/login", class="redirect-link") Log in
                 if msg
                     p.error-message= msg

@@ -1,7 +1,7 @@
 const express = require('express');
 
 exports.getLogin = (req, res) => {
-    res.render('auth_login', {});
+    res.render('auth/auth_login', {});
 }; 
 
 exports.postLogin = (req, res) => {
@@ -18,11 +18,11 @@ exports.postLogin = (req, res) => {
 }; 
 
 exports.getSignup = (req, res) => {
-    res.render('auth_signup', {});
+    res.render('auth/auth_signup', {});
 };
 
 exports.postSignup = (req, res) => {
-    res.render('auth_signup', {});//todo
+    res.render('auth/auth_signup', {});//todo
 }; 
 
 exports.getLogout = (req, res) => {

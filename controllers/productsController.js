@@ -3,7 +3,7 @@ const Product = require('../models/Product');
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.find(); 
-        res.render('products', { products: products });
+        res.render('products/products', { products: products });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -18,9 +18,9 @@ exports.getProductByName = async (req, res) => {
     try {
         const product = await Product.findOne({name:name});
         if (product == null) {
-            res.render('products_empty', { message: `We have no: ${name}`});
+            res.render('products/products_empty', { message: `We have no: ${name}`});
         } else {
-            res.render('products', { products: [product] });
+            res.render('products/products', { products: [product] });
         }
     } catch (err) {
         console.error(err);

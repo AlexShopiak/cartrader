@@ -1,18 +1,29 @@
-const express = require('express');
+const User = require('../models/user.js')
 
 exports.getLogin = (req, res) => {
     res.render('auth/auth_login', {});
 }; 
 
-exports.postLogin = (req, res) => {
+exports.postLogin = async (req, res) => {
     if(!req.body.name || !req.body.password){
         res.status("400");
         res.send("Invalid details!");
     } else {
-        if('Alex' === req.body.name && '1234' === req.body.password){
-            const newUser = {name: req.body.name, password: req.body.password};
-            req.session.user = newUser;
-            res.redirect('/profile');
+        try {
+            const valid = await User.findOne(req.body);
+            
+            if (valid) {
+                req.session.user = req.body;
+                res.redirect('/profile');
+            } else {
+                const exist = await User.findOne({name: req.body.name});
+                let msg = "User does not exist";
+                if (exist) msg = "Wrong password";
+                res.render('auth/auth_login', { msg });
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
         }
     }
 }; 

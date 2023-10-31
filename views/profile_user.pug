@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Profile
+        link(rel='stylesheet', type='text/css', href='/css/basic.css')
+        link(rel='stylesheet', type='text/css', href='/css/profile/info-container.css')
+    body
+        #navbar
+            button(onclick="location.href='/main'") MAIN
+            button(onclick="location.href='/products'") PRODUCTS
+            button(onclick="location.href='/profile'") PROFILE
+        .info-container
+            .info-box
+                label  You are #{msg}
+                .buttons
+                    button#submit-button(onclick="location.href='/auth/logout'") Log out

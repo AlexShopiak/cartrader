@@ -5,26 +5,21 @@ exports.getLogin = (req, res) => {
 }; 
 
 exports.postLogin = async (req, res) => {
-    if(!req.body.name || !req.body.password){
-        res.status("400");
-        res.send("Invalid details!");
-    } else {
-        try {
-            const valid = await User.findOne(req.body);
-            
-            if (valid) {
-                req.session.user = req.body;
-                res.redirect('/profile');
-            } else {
-                const exist = await User.findOne({name: req.body.name});
-                let msg = "User does not exist";
-                if (exist) msg = "Wrong password";
-                res.render('auth/auth_login', { msg });
-            }
-        } catch (err) {
-            console.error(err);
-            res.status(500).send('Server Error');
+    try {
+        const valid = await User.findOne(req.body);
+        
+        if (valid) {
+            req.session.user = req.body;
+            res.redirect('/profile');
+        } else {
+            const exist = await User.findOne({name: req.body.name});
+            let msg = "User does not exist";
+            if (exist) msg = "Wrong password";
+            res.render('auth/auth_login', { msg });
         }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
     }
 }; 
 
@@ -32,8 +27,19 @@ exports.getSignup = (req, res) => {
     res.render('auth/auth_signup', {});
 };
 
-exports.postSignup = (req, res) => {
-    res.render('auth/auth_signup', {});//todo
+exports.postSignup = async (req, res) => {
+    try {
+        const exist = await User.findOne({name: req.body.name});
+        if (!exist) {
+            await User.create(req.body);
+            res.render('auth/auth_login', { msg: "User was created" });
+        } else {
+            res.render('auth/auth_signup', { msg: "User already exists" });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 }; 
 
 exports.getLogout = (req, res) => {

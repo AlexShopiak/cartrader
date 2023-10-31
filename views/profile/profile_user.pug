@@ -18,9 +18,10 @@ html
                 .buttons
                     button#submit-button(onclick="location.href='/auth/logout'") Log out
             .info-box 
-                .inputs
-                    input(name = "name"  type="text", required placeholder="Name")
-                    input(name = "description"  type="text", required placeholder="Description")
-                    input(name = "price"  type="text", required placeholder="Price")
-                .buttons
-                    button#submit-button(onclick="location.href='/auth/logout'") Create item
+                form(action = "/profile/create_item" method = "POST")
+                    .inputs
+                        input(name = "name"  type="text", required placeholder="Name")
+                        input(name = "description"  type="text", required placeholder="Description")
+                        input(name = "price"  type="text", required placeholder="Price")
+                    .buttons
+                        button#submit-button(type="Submit") Create item

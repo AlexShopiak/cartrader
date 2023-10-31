@@ -19,6 +19,9 @@ html
                 .product
                     h2= product.name
                     p= product.description
+                    p= `Owner: ${product.owner}`
+                    p= `Price: ${product.price} GBP` 
+                    button(type="button") Buy
     script.
         function clickFind() {
             const name = document.getElementById('search-input').value;

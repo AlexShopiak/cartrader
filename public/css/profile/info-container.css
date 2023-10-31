@@ -1,7 +1,9 @@
 .info-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    margin: 20px auto;
+    width: 30%;
 }
 
 .info-box {
@@ -11,6 +13,32 @@
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 0 15px #ccc;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.labels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    padding: 10px;
+    margin: 1px;
+    width: 100px;
+    text-align: left;
 }
 
 .buttons {

@@ -11,6 +11,16 @@ html
             button(onclick="location.href='/profile'") PROFILE
         .info-container
             .info-box
-                label  You are #{msg}
+                .labels
+                    h3 Account info
+                    label Name: #{name}
+                    label Items: #{items}
                 .buttons
                     button#submit-button(onclick="location.href='/auth/logout'") Log out
+            .info-box 
+                .inputs
+                    input(name = "name"  type="text", required placeholder="Name")
+                    input(name = "description"  type="text", required placeholder="Description")
+                    input(name = "price"  type="text", required placeholder="Price")
+                .buttons
+                    button#submit-button(onclick="location.href='/auth/logout'") Create item

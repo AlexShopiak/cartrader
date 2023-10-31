@@ -3,29 +3,9 @@ html
     head
         title Main
         link(rel='stylesheet', type='text/css', href='/css/basic.css')
-        link(rel='stylesheet', type='text/css', href='/css/main.login-container.css')
     body
         #navbar
-            button(onclick="location.href='/'") MAIN
+            button(onclick="location.href='/main'") MAIN
             button(onclick="location.href='/products'") PRODUCTS
             button(onclick="location.href='/profile'") PROFILE
-        h1 Log in to your account
-        .login-container
-            .login-box
-                .inputs
-                    input(type="text", placeholder="Name", id="name")
-                    input(type="password", placeholder="Password", id="pass")
-                .buttons
-                    button#submit-button(type="button", onclick="clickLogin()") Log in
-                    button#submit-button(type="button", onclick="clickSignup()") Sign up
-    script.
-        function clickLogin() {
-            const name = document.getElementById("name").value;
-            const pass = document.getElementById("pass").value;
-            location.href = `/profile/login`;
-        }
-        function clickSignup() {
-            const name = document.getElementById("name").value;
-            const pass = document.getElementById("pass").value;
-            location.href = `/profile/signup`;
-        }
+        h1 MAIN

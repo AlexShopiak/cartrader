@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 
-getAllProducts = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.find(); 
         res.render('products', { products: products });
@@ -10,10 +10,10 @@ getAllProducts = async (req, res) => {
     }
 };
 
-getProductByName = async (req, res) => {
+exports.getProductByName = async (req, res) => {
     const name = req.query.name;
     if (!name) {
-        return getAllProducts(req, res);
+       return res.redirect('/products');
     }
     try {
         const product = await Product.findOne({name:name});
@@ -26,9 +26,4 @@ getProductByName = async (req, res) => {
         console.error(err);
         res.status(500).send('Server Error');
     }
-}; 
-
-module.exports = {
-    getAllProducts,
-    getProductByName
-}
+};

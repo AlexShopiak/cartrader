@@ -8,7 +8,18 @@ label {
     font-weight: bold;
 }
   
-#search-input, #search-button {
+#search-input {
     margin: 10px;
     padding: 5px;
+}
+
+#search-button {
+    flex: 1;
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    background-color: #008CBA;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
 }

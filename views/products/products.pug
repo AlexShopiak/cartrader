@@ -34,5 +34,12 @@ html
             const name = document.getElementById('search-input').value;
             const sort = document.getElementById('sort-select').value;
             const owner = document.getElementById('owner-select').value;
-            location.href = `/products/find?sort=${sort}&owner=${owner}&name=${name}`;
+            let url = `/products/find?name=${name}`
+            if (sort !== 'any') {
+                url += `&sort=${sort}`
+            }
+            if (owner !== 'any') {
+                url += `&owner=${owner}`
+            }
+            location.href = url;
         }

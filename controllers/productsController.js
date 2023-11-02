@@ -11,17 +11,31 @@ exports.getAllProducts = async (req, res) => {
     }
 };
 
-exports.getProductByName = async (req, res) => {
+exports.getProductsBy = async (req, res) => {
+    const sort = req.query.sort;
+    const owner = req.query.owner;
     const name = req.query.name;
-    if (!name) {
-       return res.redirect('/products');
-    }
+    if (!owner && !name) return res.redirect('/products');
+
     try {
-        const product = await Product.findOne({name:name});
-        if (product == null) {
-            res.render('products/products_empty', { message: `We have no: ${name}`});
+        const ownersList = await Product.distinct('owner');
+        let params = {};
+
+        if (owner && !name) params = {owner:owner};
+        else if (!owner && name) params = {name:name};
+        else params = {name:name, owner:owner};
+
+        let products = await Product.find(params);
+        if (products == null) {
+            res.render('products/products_empty', { message: "No results", ownersList: owners});
         } else {
-            res.render('products/products', { products: [product] });
+            products = Array.isArray(products) ? products : [products];
+            if (sort == 'fromcheap') {
+                products = products.sort((a, b) => a.price - b.price);
+            } else if (sort == 'tocheap') {
+                products = products.sort((a, b) => b.price - a.price);
+            }
+            res.render('products/products', { products: products, owners: ownersList });
         }
     } catch (err) {
         console.error(err);

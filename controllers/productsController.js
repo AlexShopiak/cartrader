@@ -3,7 +3,8 @@ const Product = require('../models/Product');
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.find(); 
-        res.render('products/products', { products: products });
+        const owners = await Product.distinct('owner');
+        res.render('products/products', { products: products, owners: owners });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

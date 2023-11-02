@@ -12,34 +12,48 @@ exports.getAllProducts = async (req, res) => {
 };
 
 exports.getProductsBy = async (req, res) => {
-    const sort = req.query.sort;
     const owner = req.query.owner;
     const name = req.query.name;
-    if (!owner && !name) return res.redirect('/products');
-
-    try {
-        const ownersList = await Product.distinct('owner');
-        let params = {};
-
-        if (owner && !name) params = {owner:owner};
-        else if (!owner && name) params = {name:name};
-        else params = {name:name, owner:owner};
-
-        let products = await Product.find(params);
-        
-        if (products.length == 0) {
-            console.log('EMPTY')
-            res.render('products/products_empty', { message: "No results", ownersList: ownersList});
-        } else {
-            if (sort == 'fromcheap') {
-                products = products.sort((a, b) => a.price - b.price);
-            } else if (sort == 'tocheap') {
-                products = products.sort((a, b) => b.price - a.price);
+    const sort = req.query.sort;
+    if (!owner && !name) {
+        return res.redirect('/products');
+    } else {
+        try {
+            const ownersList = await Product.distinct('owner');
+            let products = await Product.find(getParams(owner, name));
+    
+            if (products.length == 0) {
+                res.render('products/products_empty', { message: "No results", ownersList: ownersList});
+            } else {
+                products = sortProducts(sort, products);
+                res.render('products/products', { products: products, owners: ownersList });
             }
-            res.render('products/products', { products: products, owners: ownersList });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
         }
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
     }
 };
+
+const getParams = (owner, name) => {
+    let params = {};
+
+    if (owner && !name) {
+        params = {owner:owner};
+    } else if (!owner && name) {
+        params = {name:name};
+    } else {
+        params = {name:name, owner:owner};
+    }
+    return params;
+}
+
+const sortProducts = (type, products) => {
+    const copy = products.slice();
+    if (type == 'fromcheap') {
+        copy.sort((a, b) => a.price - b.price);
+    } else if (type == 'tocheap') {
+        copy.sort((a, b) => b.price - a.price);
+    }
+    return copy;
+}

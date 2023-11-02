@@ -26,10 +26,11 @@ exports.getProductsBy = async (req, res) => {
         else params = {name:name, owner:owner};
 
         let products = await Product.find(params);
-        if (products == null) {
-            res.render('products/products_empty', { message: "No results", ownersList: owners});
+        
+        if (products.length == 0) {
+            console.log('EMPTY')
+            res.render('products/products_empty', { message: "No results", ownersList: ownersList});
         } else {
-            products = Array.isArray(products) ? products : [products];
             if (sort == 'fromcheap') {
                 products = products.sort((a, b) => a.price - b.price);
             } else if (sort == 'tocheap') {

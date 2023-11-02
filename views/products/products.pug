@@ -12,14 +12,14 @@ html
             button(onclick="location.href='/profile'") PROFILE
         form#search-form
             select#sort-select()
-                option(value="any") -
-                option(value="fromcheap") From cheap
-                option(value="tocheap") To cheap
+                option(value="any", selected=prev && prev.sort === 'any') -
+                option(value="fromcheap", selected=prev && prev.sort === 'fromcheap') From cheap
+                option(value="tocheap", selected=prev && prev.sort === 'tocheap') To cheap
             select#owner-select()
-                option(value="any") -
+                option(value="any", selected=prev && prev.owner === 'any') -
                 each owner in owners
-                    option(value=owner)= owner
-            input#search-input( type="text", placeholder="Find by name")
+                    option(value=owner, selected=prev && prev.owner === owner)= owner
+            input#search-input( type="text", placeholder="Find by name", value=prev ? prev.name : "")
             button#search-button(type="button", onclick="clickFind()") Find
         #product-container
             each product in products

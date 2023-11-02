@@ -15,7 +15,9 @@ exports.getProductsBy = async (req, res) => {
     const owner = req.query.owner;
     const name = req.query.name;
     const sort = req.query.sort;
-    if (!owner && !name) {
+    const prev = {sort:sort, owner:owner, name:name };
+
+    if (!sort && !owner && !name) {
         return res.redirect('/products');
     } else {
         try {
@@ -26,7 +28,7 @@ exports.getProductsBy = async (req, res) => {
                 res.render('products/products_empty', { message: "No results", ownersList: ownersList});
             } else {
                 products = sortProducts(sort, products);
-                res.render('products/products', { products: products, owners: ownersList });
+                res.render('products/products', { products: products, owners: ownersList, prev:prev });
             }
         } catch (err) {
             console.error(err);
@@ -42,9 +44,10 @@ const getParams = (owner, name) => {
         params = {owner:owner};
     } else if (!owner && name) {
         params = {name:name};
-    } else {
+    } else if (owner && name){
         params = {name:name, owner:owner};
-    }
+    } 
+    
     return params;
 }
 

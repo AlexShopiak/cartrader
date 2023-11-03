@@ -10,12 +10,30 @@ html
             button(onclick="location.href='/products'") PRODUCTS
             button(onclick="location.href='/profile'") PROFILE
         form#search-form
-            label(for="search-input") Search:
-            input#search-input(type="text", placeholder="Find by name")
+            select#sort-select()
+                option(value="", disabled, selected)= "Price sorting"
+                option(value="any", selected=prev && prev.sort === 'any') -
+                option(value="fromcheap", selected=prev && prev.sort === 'fromcheap') From cheap
+                option(value="tocheap", selected=prev && prev.sort === 'tocheap') To cheap
+            select#owner-select()
+                option(value="", disabled, selected)= "Owner"
+                option(value="any", selected=prev && prev.owner === 'any') -
+                each owner in owners
+                    option(value=owner, selected=prev && prev.owner === owner)= owner
+            input#search-input( type="text", placeholder="Find by name", value=prev ? prev.name : "")
             button#search-button(type="button", onclick="clickFind()") Find
         h1= message 
     script.
         function clickFind() {
             const name = document.getElementById('search-input').value;
-            location.href = `/products/find?name=${name}`;
+            const sort = document.getElementById('sort-select').value;
+            const owner = document.getElementById('owner-select').value;
+            let url = `/products/find?name=${name}`
+            if (sort !== 'any') {
+                url += `&sort=${sort}`
+            }
+            if (owner !== 'any') {
+                url += `&owner=${owner}`
+            }
+            location.href = url;
         }

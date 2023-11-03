@@ -12,10 +12,12 @@ html
             button(onclick="location.href='/profile'") PROFILE
         form#search-form
             select#sort-select()
+                option(value="", disabled, selected)= "Price sorting"
                 option(value="any", selected=prev && prev.sort === 'any') -
                 option(value="fromcheap", selected=prev && prev.sort === 'fromcheap') From cheap
                 option(value="tocheap", selected=prev && prev.sort === 'tocheap') To cheap
             select#owner-select()
+                option(value="", disabled, selected)= "Owner"
                 option(value="any", selected=prev && prev.owner === 'any') -
                 each owner in owners
                     option(value=owner, selected=prev && prev.owner === owner)= owner

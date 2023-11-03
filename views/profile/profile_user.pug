@@ -4,6 +4,8 @@ html
         title Profile
         link(rel='stylesheet', type='text/css', href='/css/basic.css')
         link(rel='stylesheet', type='text/css', href='/css/profile/info-container.css')
+        link(rel='stylesheet', type='text/css', href='/css/products/search-form.css')
+        link(rel='stylesheet', type='text/css', href='/css/profile/user-products-container.css')
     body
         #navbar
             button(onclick="location.href='/main'") MAIN
@@ -25,3 +27,32 @@ html
                         input(name = "price"  type="text", required placeholder="Price")
                     .buttons
                         button#submit-button(type="Submit") Create item
+        form#search-form
+            select#sort-select()
+                option(value="", disabled, selected)= "Price sorting"
+                option(value="any", selected=prev && prev.sort === 'any') -
+                option(value="fromcheap", selected=prev && prev.sort === 'fromcheap') From cheap
+                option(value="tocheap", selected=prev && prev.sort === 'tocheap') To cheap
+            input#search-input( type="text", placeholder="Find by name", value=prev ? prev.name : "")
+            button#search-button(type="button", onclick="clickFind()") Find
+        #product-container
+            if products
+                each product in products
+                    .product
+                        h2= product.name
+                        p= product.description
+                        p= `Price: ${product.price} GBP` 
+                        button.edit-button(type="button") Edit
+                        button.delete-button(type="button") Delete
+        if message
+            h1= message
+    script.
+        function clickFind() {
+            const name = document.getElementById('search-input').value;
+            const sort = document.getElementById('sort-select').value;
+            let url = `/profile/find?name=${name}`
+            if (sort !== 'any') {
+                url += `&sort=${sort}`
+            }
+            location.href = url;
+        }

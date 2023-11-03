@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/profileController');
 
 router.get('/', controller.profile);
+router.get('/find', controller.profile);
 
 router.post('/create_item', controller.createItem);
 router.post('/delete_item', controller.deleteItem);

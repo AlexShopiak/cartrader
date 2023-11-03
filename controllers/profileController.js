@@ -2,12 +2,30 @@ const Product = require('../models/Product');
 
 exports.profile = async (req, res) => {
     if (req.session.user) {
+        const name = req.query.name;
+        const sort = req.query.sort;
+        const prev = {name:name, sort:sort};
         try {
-            const count = await Product.countDocuments({ owner: req.session.user.name })
-            res.render('profile/profile_user', {
-                name: req.session.user.name, 
-                items: count,
-            });
+            const itemsNum = await Product.countDocuments({ owner: req.session.user.name });
+            const params = getParams(req.session.user.name, name);
+            let products = await Product.find(params);
+
+            if (products.length == 0) {
+                res.render('profile/profile_user', {
+                    name: req.session.user.name, 
+                    items: itemsNum, 
+                    message: "No results", 
+                    prev: prev 
+                });
+            } else {
+                products = sortProducts(sort, products);
+                res.render('profile/profile_user', { 
+                    name: req.session.user.name, 
+                    items: itemsNum,
+                    products: products, 
+                    prev: prev 
+                });
+            }
         } catch (err) {
             console.error(err);
             res.status(500).send('Server Error');
@@ -39,3 +57,21 @@ exports.createItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
     res.redirect('/auth/login'); //todo
 };
+
+const getParams = (owner, name) => {
+    if (name) {
+        return { owner: owner, name:name };
+    } else {
+        return { owner: owner };
+    } 
+}
+
+const sortProducts = (type, products) => {
+    const copy = products.slice();
+    if (type == 'fromcheap') {
+        copy.sort((a, b) => a.price - b.price);
+    } else if (type == 'tocheap') {
+        copy.sort((a, b) => b.price - a.price);
+    }
+    return copy;
+}

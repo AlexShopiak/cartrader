@@ -24,13 +24,16 @@ html
             input#search-input( type="text", placeholder="Find by name", value=prev ? prev.name : "")
             button#search-button(type="button", onclick="clickFind()") Find
         #product-container
-            each product in products
-                .product
-                    h2= product.name
-                    p= product.description
-                    p= `Owner: ${product.owner}`
-                    p= `Price: ${product.price} GBP` 
-                    button(type="button") Buy
+            if products
+                each product in products
+                    .product
+                        h2= product.name
+                        p= product.description
+                        p= `Owner: ${product.owner}`
+                        p= `Price: ${product.price} GBP` 
+                        button(type="button") Buy
+        if message
+            h1= message
     script.
         function clickFind() {
             const name = document.getElementById('search-input').value;

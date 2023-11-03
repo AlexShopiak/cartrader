@@ -25,7 +25,7 @@ exports.getProductsBy = async (req, res) => {
             let products = await Product.find(getParams(owner, name));
     
             if (products.length == 0) {
-                res.render('products/products_empty', { message: "No results", owners: ownersList, prev: prev });
+                res.render('products/products', { message: "No results", owners: ownersList, prev: prev });
             } else {
                 products = sortProducts(sort, products);
                 res.render('products/products', { products: products, owners: ownersList, prev: prev });

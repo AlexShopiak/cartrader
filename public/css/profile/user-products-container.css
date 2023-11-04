@@ -35,15 +35,15 @@
 }
 
 .edit-button {
-    background-color: #d8a200;
+    background-color: #a1a1a1;
 }
 .delete-button {
-    background-color: #ca2727;
+    background-color: #008CBA;
 }
 
 .edit-button:hover {
-    background-color: #a27900;
+    background-color: #656565;
 }
 .delete-button:hover {
-    background-color: #8e1c1c;
+    background-color: #004d67;
 }

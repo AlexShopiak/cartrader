@@ -1,10 +1,13 @@
+'use strict';
+
 const Product = require('../models/Product');
 
 exports.getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find(); 
+        const products = await Product.find();
         const owners = await Product.distinct('owner');
-        res.render('products/products', { products: products, owners: owners });
+        const data = { products, owners };
+        res.render('products/products', data);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -15,21 +18,23 @@ exports.getProductsBy = async (req, res) => {
     const owner = req.query.owner;
     const name = req.query.name;
     const sort = req.query.sort;
-    const prev = {sort:sort, owner:owner, name:name };
 
     if (!sort && !owner && !name) {
         return res.redirect('/products');
     } else {
         try {
-            const ownersList = await Product.distinct('owner');
-            let products = await Product.find(getParams(owner, name));
-    
-            if (products.length == 0) {
-                res.render('products/products', { message: "No results", owners: ownersList, prev: prev });
+            const prev = { sort, owner, name };
+            const owners = await Product.distinct('owner');
+            const products = await Product.find(getParams(owner, name));
+            const data = { owners, prev };
+
+            if (products.length === 0) {
+                data.message = 'No results';
             } else {
-                products = sortProducts(sort, products);
-                res.render('products/products', { products: products, owners: ownersList, prev: prev });
+                data.products = sortProducts(sort, products);
             }
+
+            res.render('products/products', data);
         } catch (err) {
             console.error(err);
             res.status(500).send('Server Error');
@@ -41,22 +46,24 @@ const getParams = (owner, name) => {
     let params = {};
 
     if (owner && !name) {
-        params = {owner:owner};
+        params = { owner };
     } else if (!owner && name) {
-        params = {name:name};
-    } else if (owner && name){
-        params = {name:name, owner:owner};
-    } 
-    
+        params = { name };
+    } else if (owner && name) {
+        params = { name, owner };
+    }
+
     return params;
-}
+};
 
 const sortProducts = (type, products) => {
     const copy = products.slice();
-    if (type == 'fromcheap') {
+
+    if (type === 'fromcheap') {
         copy.sort((a, b) => a.price - b.price);
-    } else if (type == 'tocheap') {
+    } else if (type === 'tocheap') {
         copy.sort((a, b) => b.price - a.price);
     }
+
     return copy;
-}
+};

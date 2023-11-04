@@ -25,7 +25,7 @@ exports.profile = async (req, res) => {
                 data.products = sortProducts(sort, products);
             }
 
-            res.render('profile/profile_user', data);
+            res.render('profile_page', data);
         } catch (err) {
             console.error(err);
             res.status(500).send('Server Error');

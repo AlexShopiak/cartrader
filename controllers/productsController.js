@@ -7,7 +7,7 @@ exports.getAllProducts = async (req, res) => {
         const products = await Product.find();
         const owners = await Product.distinct('owner');
         const data = { products, owners };
-        res.render('products/products', data);
+        res.render('products_page', data);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -20,7 +20,7 @@ exports.getProductsBy = async (req, res) => {
     const sort = req.query.sort;
 
     if (!sort && !owner && !name) {
-        return res.redirect('/products');
+        res.redirect('/products');
     } else {
         try {
             const prev = { sort, owner, name };
@@ -34,7 +34,7 @@ exports.getProductsBy = async (req, res) => {
                 data.products = sortProducts(sort, products);
             }
 
-            res.render('products/products', data);
+            res.render('products_page', data);
         } catch (err) {
             console.error(err);
             res.status(500).send('Server Error');

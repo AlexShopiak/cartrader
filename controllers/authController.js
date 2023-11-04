@@ -10,7 +10,7 @@ exports.getLogin = (req, res) => {
         redirectLink: '/auth/signup',
         redirectText: 'Sign Up',
     };
-    res.render('auth', data);
+    res.render('auth_page', data);
 };
 
 exports.postLogin = async (req, res) => {
@@ -33,7 +33,7 @@ exports.postLogin = async (req, res) => {
             const exist = await User.findOne({ name: req.body.name });
             if (exist) data.message = 'Wrong password';
 
-            res.render('auth', data);
+            res.render('auth_page', data);
         }
     } catch (err) {
         console.error(err);
@@ -49,7 +49,7 @@ exports.getSignup = (req, res) => {
         redirectLink: '/auth/login',
         redirectText: 'Log in',
     };
-    res.render('auth', data);
+    res.render('auth_page', data);
 };
 
 exports.postSignup = async (req, res) => {
@@ -82,7 +82,7 @@ exports.postSignup = async (req, res) => {
             data = loginData;
         }
 
-        res.render('auth', data);
+        res.render('auth_page', data);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

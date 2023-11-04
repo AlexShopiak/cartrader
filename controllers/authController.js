@@ -1,27 +1,32 @@
-const User = require('../models/user.js')
+'use strict';
+
+const User = require('../models/user.js');
 
 exports.getLogin = (req, res) => {
     res.render('auth/auth_login', {});
-}; 
+};
 
 exports.postLogin = async (req, res) => {
     try {
         const valid = await User.findOne(req.body);
-        
+
         if (valid) {
             req.session.user = req.body;
             res.redirect('/profile');
         } else {
-            const exist = await User.findOne({name: req.body.name});
-            let msg = "User does not exist";
-            if (exist) msg = "Wrong password";
-            res.render('auth/auth_login', { msg });
+            const data = { message: 'User does not exist' };
+            const exist = await User.findOne({ name: req.body.name });
+
+            if (exist) {
+                data.message = 'Wrong password';
+            }
+            res.render('auth/auth_login', data);
         }
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-}; 
+};
 
 exports.getSignup = (req, res) => {
     res.render('auth/auth_signup', {});
@@ -29,22 +34,25 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = async (req, res) => {
     try {
-        const exist = await User.findOne({name: req.body.name});
-        if (!exist) {
-            await User.create(req.body);
-            res.render('auth/auth_login', { msg: "User was created" });
+        const exist = await User.findOne({ name: req.body.name });
+        if (exist) {
+            const data = { message: 'User already exists' };
+            res.render('auth/auth_signup', data);
         } else {
-            res.render('auth/auth_signup', { msg: "User already exists" });
+            await User.create(req.body);
+            const data = { message: 'User was created' };
+            res.render('auth/auth_login', data);
         }
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
     }
-}; 
+};
 
 exports.getLogout = (req, res) => {
+    const name = req.session.user.name;
     req.session.destroy(() => {
-        console.log("user logged out.")
+        console.log(name, 'logged out');
     });
     res.redirect('/profile');
 };

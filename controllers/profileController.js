@@ -4,36 +4,35 @@ exports.profile = async (req, res) => {
     if (req.session.user) {
         const name = req.query.name;
         const sort = req.query.sort;
-        const prev = {name:name, sort:sort};
+        const prev = { name: name, sort: sort };
+  
         try {
-            const itemsNum = await Product.countDocuments({ owner: req.session.user.name });
-            const params = getParams(req.session.user.name, name);
-            let products = await Product.find(params);
-
+            const itemsCounter = await Product.countDocuments({ owner: req.session.user.name });
+    
+            const data = {
+                name: req.session.user.name,
+                items: itemsCounter,
+                prev: prev,
+            };
+    
             if (products.length == 0) {
-                res.render('profile/profile_user', {
-                    name: req.session.user.name, 
-                    items: itemsNum, 
-                    message: "No results", 
-                    prev: prev 
-                });
+                data.message = "No results";
             } else {
-                products = sortProducts(sort, products);
-                res.render('profile/profile_user', { 
-                    name: req.session.user.name, 
-                    items: itemsNum,
-                    products: products, 
-                    prev: prev 
-                });
+                const params = getParams(req.session.user.name, name);
+                const products = await Product.find(params);
+                data.products = sortProducts(sort, products);
             }
+    
+            res.render('profile/profile_user', data);
         } catch (err) {
             console.error(err);
             res.status(500).send('Server Error');
         }
     } else {
-        res.redirect('/auth/login')
+      res.redirect('/auth/login');
     }
 };
+  
 
 exports.createItem = async (req, res) => {
     if (req.session.user) {

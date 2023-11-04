@@ -3,7 +3,14 @@
 const User = require('../models/user.js');
 
 exports.getLogin = (req, res) => {
-    res.render('auth/auth_login', {});
+    const data = {
+        actionLink: '/auth/login',
+        labelText: 'Log in to your account',
+        buttonText: 'Log in',
+        redirectLink: '/auth/signup',
+        redirectText: 'Sign Up',
+    };
+    res.render('auth', data);
 };
 
 exports.postLogin = async (req, res) => {
@@ -14,13 +21,19 @@ exports.postLogin = async (req, res) => {
             req.session.user = req.body;
             res.redirect('/profile');
         } else {
-            const data = { message: 'User does not exist' };
-            const exist = await User.findOne({ name: req.body.name });
+            const data = {
+                actionLink: '/auth/login',
+                labelText: 'Log in to your account',
+                buttonText: 'Log in',
+                redirectLink: '/auth/signup',
+                redirectText: 'Sign Up',
+                message: 'User does not exist',
+            };
 
-            if (exist) {
-                data.message = 'Wrong password';
-            }
-            res.render('auth/auth_login', data);
+            const exist = await User.findOne({ name: req.body.name });
+            if (exist) data.message = 'Wrong password';
+
+            res.render('auth', data);
         }
     } catch (err) {
         console.error(err);
@@ -29,20 +42,47 @@ exports.postLogin = async (req, res) => {
 };
 
 exports.getSignup = (req, res) => {
-    res.render('auth/auth_signup', {});
+    const data = {
+        actionLink: '/auth/signup',
+        labelText: 'Create your account',
+        buttonText: 'Sign up',
+        redirectLink: '/auth/login',
+        redirectText: 'Log in',
+    };
+    res.render('auth', data);
 };
 
 exports.postSignup = async (req, res) => {
     try {
+        let data;
+
+        const signupData = {
+            actionLink: '/auth/signup',
+            labelText: 'Create your account',
+            buttonText: 'Sign up',
+            redirectLink: '/auth/login',
+            redirectText: 'Log in',
+            message: 'User already exists',
+        };
+
+        const loginData = {
+            actionLink: '/auth/login',
+            labelText: 'Log in to your account',
+            buttonText: 'Log in',
+            redirectLink: '/auth/signup',
+            redirectText: 'Sign Up',
+            message: 'User was created',
+        };
+
         const exist = await User.findOne({ name: req.body.name });
         if (exist) {
-            const data = { message: 'User already exists' };
-            res.render('auth/auth_signup', data);
+            data = signupData;
         } else {
             await User.create(req.body);
-            const data = { message: 'User was created' };
-            res.render('auth/auth_login', data);
+            data = loginData;
         }
+
+        res.render('auth', data);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

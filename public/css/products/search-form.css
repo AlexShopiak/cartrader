@@ -15,7 +15,7 @@ label {
     padding: 10px;
     display: inline-block; 
 
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #ccc;
 }

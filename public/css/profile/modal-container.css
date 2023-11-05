@@ -1,4 +1,4 @@
-#modal-container {
+#modal-edit-container, #modal-delete-container {
     display: none;
     justify-content: center;
     align-items: center;
@@ -10,8 +10,8 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
-  
-.modal {
+
+.edit-modal {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -20,12 +20,21 @@
     position: relative;
 }
 
-.modal h2 {
-    margin: 10px 0;
+.delete-modal {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
 }
   
-.modal p {
-    margin: 10px 0;
+.edit-modal, .delete-modal p {
+    margin: 10px 5px;
+}
+
+.buttons {
+    justify-content: space-between;
 }
 
 .cancel-button, .ok-button {
@@ -39,16 +48,29 @@
     width: 100px;
 }
 
-.cancel-button {
-    background-color: #a1a1a1;
-}
 .ok-button {
     background-color: #008CBA;
 }
-
-.cance-button:hover {
-    background-color: #656565;
-}
 .ok-button:hover {
     background-color: #004d67;
+}
+
+.cancel-button {
+    background-color: #a1a1a1;
+}
+.cancel-button:hover {
+    background-color: #656565;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }

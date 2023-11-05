@@ -43,15 +43,26 @@ html
                         h2= product.name
                         p= product.description
                         p= `Price: ${product.price} GBP` 
-                        button.edit-button(type="button", onclick="showModal()") Edit
-                        button.delete-button(type="button", onclick="showModal()") Delete
-        #modal-container
-            .modal
-                h2 Are you sure?
-                p You will not be able to restore it
-                button.edit-button(type="button", onclick="hideModal()") Cancel
-                button.delete-button(type="button", onclick="hideModal()") Delete
-
+                        button.edit-button(type="button", product-data=product, onclick="showEditModal()") Edit
+                        button.delete-button(type="button", onclick="showDeleteModal()") Delete
+        #modal-edit-container
+            .edit-modal 
+                form(action = "/profile/update_item" method = "POST")
+                    .inputs
+                        input(type = "hidden", name="id")
+                        input(name = "name"  type="text", required placeholder="Name")
+                        input(name = "description"  type="text", required placeholder="Description")
+                        input(name = "price"  type="text", required placeholder="Price")
+                    .butons
+                        button.cancel-button(type="button", onclick="hideEditModal()") Cancel
+                        button.ok-button(type="Submit") Update
+        #modal-delete-container
+            .delete-modal
+                p You will not be able to restore it!
+                form(action = "/profile/delete_item" method = "POST")
+                    .butons
+                        button.cancel-button(type="button", onclick="hideDeleteModal()") Cancel
+                        button.ok-button(type="Submit") Delete
         if message
             h1= message
     script.
@@ -65,10 +76,31 @@ html
             location.href = url;
         }
 
-        function showModal() {
-        document.querySelector("#modal-container").style.display = "flex";
+        function showEditModal() {
+            document.querySelector("#modal-edit-container").style.display = "flex";
+
+            const editButton = event.target; // Получаем кнопку, которую нажали
+            const productData = editButton.getAttribute("product-data");
+            const product = JSON.parse(productData);
+
+            const idInput = document.querySelector("#modal-edit-container input[name='id']");
+            const nameInput = document.querySelector("#modal-edit-container input[name='name']");
+            const descInput = document.querySelector("#modal-edit-container input[name='description']");
+            const priceInput = document.querySelector("#modal-edit-container input[name='price']");
+
+            idInput.value = product._id;
+            console.log(product._id)
+            nameInput.value = product.name;
+            descInput.value = product.description;
+            priceInput.value = product.price;
+        }
+        function hideEditModal() {
+            document.querySelector("#modal-edit-container").style.display = "none";
         }
 
-        function hideModal() {
-            document.querySelector("#modal-container").style.display = "none";
+        function showDeleteModal() {
+            document.querySelector("#modal-delete-container").style.display = "flex";
+        }
+        function hideDeleteModal() {
+            document.querySelector("#modal-delete-container").style.display = "none";
         }

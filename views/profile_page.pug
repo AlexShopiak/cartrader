@@ -6,6 +6,7 @@ html
         link(rel='stylesheet', type='text/css', href='/css/profile/info-container.css')
         link(rel='stylesheet', type='text/css', href='/css/products/search-form.css')
         link(rel='stylesheet', type='text/css', href='/css/profile/user-products-container.css')
+        link(rel='stylesheet', type='text/css', href='/css/profile/modal-container.css')
     body
         #navbar
             button(onclick="location.href='/main'") MAIN
@@ -42,8 +43,15 @@ html
                         h2= product.name
                         p= product.description
                         p= `Price: ${product.price} GBP` 
-                        button.edit-button(type="button") Edit
-                        button.delete-button(type="button") Delete
+                        button.edit-button(type="button", onclick="showModal()") Edit
+                        button.delete-button(type="button", onclick="showModal()") Delete
+        #modal-container
+            .modal
+                h2 Are you sure?
+                p You will not be able to restore it
+                button.edit-button(type="button", onclick="hideModal()") Cancel
+                button.delete-button(type="button", onclick="hideModal()") Delete
+
         if message
             h1= message
     script.
@@ -55,4 +63,12 @@ html
                 url += `&sort=${sort}`
             }
             location.href = url;
+        }
+
+        function showModal() {
+        document.querySelector("#modal-container").style.display = "flex";
+        }
+
+        function hideModal() {
+            document.querySelector("#modal-container").style.display = "none";
         }

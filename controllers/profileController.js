@@ -74,8 +74,17 @@ exports.updateItem = async (req, res) => {
 };
 
 exports.deleteItem = async (req, res) => {
-    console.log('DELETED'); //todo
-    res.redirect('/profile');
+    if (req.session.user) {
+        try {
+            await Product.deleteOne({ _id: req.body.id });
+            res.redirect('/profile');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+        }
+    } else {
+        res.redirect('/auth/login');
+    }
 };
 
 const getParams = (owner, name) => (name ? { owner, name } : { owner });

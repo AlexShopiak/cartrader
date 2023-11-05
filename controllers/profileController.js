@@ -55,11 +55,27 @@ exports.createItem = async (req, res) => {
 };
 
 exports.updateItem = async (req, res) => {
-    console.log('UPDATED'); //todo
+    if (req.session.user) {
+        try {
+            const newData = {
+                name: req.body.name,
+                description: req.body.description,
+                price: req.body.price,
+            };
+            await Product.updateOne({ _id: req.body.id }, { $set: newData });
+            res.redirect('/profile');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server Error');
+        }
+    } else {
+        res.redirect('/auth/login');
+    }
 };
 
 exports.deleteItem = async (req, res) => {
     console.log('DELETED'); //todo
+    res.redirect('/profile');
 };
 
 const getParams = (owner, name) => (name ? { owner, name } : { owner });

@@ -54,8 +54,12 @@ exports.createItem = async (req, res) => {
     }
 };
 
+exports.updateItem = async (req, res) => {
+    console.log('UPDATED'); //todo
+};
+
 exports.deleteItem = async (req, res) => {
-    res.redirect('/auth/login'); //todo
+    console.log('DELETED'); //todo
 };
 
 const getParams = (owner, name) => (name ? { owner, name } : { owner });

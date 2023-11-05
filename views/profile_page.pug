@@ -44,7 +44,7 @@ html
                         p= product.description
                         p= `Price: ${product.price} GBP` 
                         button.edit-button(type="button", product-data=product, onclick="showEditModal()") Edit
-                        button.delete-button(type="button", onclick="showDeleteModal()") Delete
+                        button.delete-button(type="button", product-data=product, onclick="showDeleteModal()") Delete
         #modal-edit-container
             .edit-modal 
                 form(action = "/profile/update_item" method = "POST")
@@ -60,6 +60,7 @@ html
             .delete-modal
                 p You will not be able to restore it!
                 form(action = "/profile/delete_item" method = "POST")
+                    input(type = "hidden", name="id")
                     .butons
                         button.cancel-button(type="button", onclick="hideDeleteModal()") Cancel
                         button.ok-button(type="Submit") Delete
@@ -100,6 +101,14 @@ html
 
         function showDeleteModal() {
             document.querySelector("#modal-delete-container").style.display = "flex";
+
+            const deleteButton = event.target; // Получаем кнопку, которую нажали
+            const productData = deleteButton.getAttribute("product-data");
+            const product = JSON.parse(productData);
+
+            const idInput = document.querySelector("#modal-delete-container input[name='id']");
+            idInput.value = product._id;
+            console.log(product._id)
         }
         function hideDeleteModal() {
             document.querySelector("#modal-delete-container").style.display = "none";

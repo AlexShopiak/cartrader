@@ -5,14 +5,19 @@ Sandboxis a medium size project which is made to show myknowledge of:
 - Express.js
 - HTML/CSS  
 
-So, after a little changes it can become a marketplace or a music video service
+So, after a little changes it can become a marketplace or a music/video service
 
 ### How to build & run a project
 - Install <code><a href="https://nodejs.org/en">Node.js</a></code>
-- Insall <code><a href="https://www.npmjs.com/package/npm">Node Package Manager</a></code>
-- At the root of the project, update the dependencies <code>npm i</code>
-- At the root of the project run the app <code>npm start</code>
-- Follow the link you will see in the console
+- Insall <code><a href="https://www.npmjs.com/package/npm">NPM</a></code>
+- Update the dependencies <code>npm i</code>
+- Run the app <code>npm start</code>
+- Follow the link in the console
+
+### Users logins
+- Alex 1234
+- User user
+- Andrew 1234
 
 ### Screenshots
 1) ![image](https://github.com/AlexShopiak/sandbox/assets/90408822/4e1c541e-6b6d-400b-8542-57f992520844)

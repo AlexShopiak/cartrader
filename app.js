@@ -6,11 +6,13 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const path = require('path');
 
+const name = 'alex';
+const pass = '0000';
 const port = process.env.PORT || 3000;
 const app = express();
 
 //DB connecting
-const uri = 'mongodb+srv://alex:0000@sandboxcluster.wh0wned.mongodb.net/?retryWrites=true&w=majority';
+const uri = `mongodb+srv://${name}:${pass}@sandboxcluster.wh0wned.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(uri);
 
 //Middlewares

@@ -1,3 +1,22 @@
+.blue-button {
+    flex: 1;
+    margin: 5px 2px;
+    padding: 10px;
+    
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #ccc;
+
+    background-color: #008CBA;
+    color: #fff;
+    cursor: pointer;
+}
+
+.blue-button:hover {
+    background-color: #004d67;
+}
+
+/*SEARCH BAR*/
 .search-bar {
     text-align: center;
     margin: 20px auto;
@@ -20,20 +39,28 @@ label {/*?*/
     box-shadow: 2px 2px 5px #ccc;
 }
 
-.search-button {
-    flex: 1;
-    margin: 5px 2px;
-    padding: 10px;
-    
-    border: none;
+/*PRODUCTS CONTAINER*/
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin: 20px auto;
+    width: 90%;
+}
+  
+.product {
+    background-color: white;
+    border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #ccc;
-
-    background-color: #008CBA;
-    color: #fff;
-    cursor: pointer;
+    padding: 10px;
+    text-align: center;
 }
 
-.search-button:hover {
-    background-color: #004d67;
+.product h2 {
+    margin: 10px 0;
+}
+  
+.product p {
+    margin: 10px 0;
 }

@@ -1,4 +1,5 @@
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
+import './NoPage.css'
 
 function NoPage() {
   return (

@@ -108,7 +108,7 @@ const ProductsContainer = ({ products } : {products: Product[]}) => {
 
 function ProductsPage() {
 	const [products, setProducts] = useState<Product[]>([]);
-	const [owners, setOwners] = useState<string[]>([]);
+	const ownersRef = useRef<string[]>([]);
 
 	const updateProducts = (newProducts: Product[]) => {
 		setProducts(newProducts);
@@ -120,7 +120,7 @@ function ProductsPage() {
 			.get('http://localhost:5555/products')
 			.then((response) => {
 				setProducts(response.data.products);
-				setOwners(response.data.owners);
+				ownersRef.current = (response.data.owners);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -129,7 +129,7 @@ function ProductsPage() {
 
 	return (<>
 		<Navbar />
-		<ProductsSearchBar owners={owners} updateProducts={updateProducts}/>
+		<ProductsSearchBar owners={ownersRef.current} updateProducts={updateProducts}/>
 		<ProductsContainer products={products}/>
 	</>)
 }

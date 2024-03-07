@@ -33,7 +33,7 @@ controller.getProductsBy = async (req, res) => {
             const data = { owners, prev };
 
             if (products.length === 0) {
-                data.message = 'No results';
+                data.products = [];
             } else {
                 data.products = sortProducts(sort, products);
             }

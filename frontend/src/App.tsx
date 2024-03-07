@@ -7,9 +7,11 @@ import ProfilePage  from './pages/ProfilePage'
 import NoPage       from './pages/NoPage'
 
 const router = createBrowserRouter([
-    {path: '/',         element: <HomePage />},
-    {path: '/products', element: <ProductsPage />},
-    {path: '/profile',  element: <ProfilePage />},
+    {path: '/', element: <HomePage />},
+    {path: '/products',     element: <ProductsPage />},
+    {path: '/products/:id', element: <ProductsPage />},
+    {path: '/profile',      element: <ProfilePage />},
+    {path: '/profile/:id',  element: <ProfilePage />},
     {path: '*',         element: <NoPage />},
 ]);
 

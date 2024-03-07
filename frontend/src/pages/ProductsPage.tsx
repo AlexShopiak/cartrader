@@ -52,15 +52,13 @@ const ProductsSearchBar = ({owners, updateProducts} : {owners: string[], updateP
 	return (
 		<div className='search-bar'>
 			<select className="sort-select" value={sorting} onChange={handleSortChange}>
-				<option value="" disabled selected>Price sorting</option>
-				<option value="any">-</option>
+				<option value="any" selected>No sorting</option>
 				<option value="fromcheap">From cheap</option>
 				<option value="tocheap">To cheap</option>
 			</select>
 
 			<select className="owner-select" value={owner} onChange={handleOwnerChange}>
-				<option value="" disabled selected>Owner</option>
-				<option value="any">-</option>
+				<option value="any" selected>All owners</option>
 				{owners.map((o,index) => (
 					<option key={index}>{o}</option>
 				))}
@@ -68,7 +66,7 @@ const ProductsSearchBar = ({owners, updateProducts} : {owners: string[], updateP
 
 			<input className='name-input' 
 				type='text' 
-				placeholder='Find by name' 
+				placeholder='Find by product name' 
 				value={name} 
 				onChange={handleNameChange}>
 			</input>
@@ -115,7 +113,6 @@ function ProductsPage() {
 	};
   
 	useEffect(() => {
-		console.log('USEEFFECT')
 		axios
 			.get('http://localhost:5555/products')
 			.then((response) => {

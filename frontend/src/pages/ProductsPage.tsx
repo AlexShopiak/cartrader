@@ -52,13 +52,13 @@ const ProductsSearchBar = ({owners, updateProducts} : {owners: string[], updateP
 	return (
 		<div className='search-bar'>
 			<select className="sort-select" value={sorting} onChange={handleSortChange}>
-				<option value="any" selected>No sorting</option>
+				<option value="any">No sorting</option>
 				<option value="fromcheap">From cheap</option>
 				<option value="tocheap">To cheap</option>
 			</select>
 
 			<select className="owner-select" value={owner} onChange={handleOwnerChange}>
-				<option value="any" selected>All owners</option>
+				<option value="any">All owners</option>
 				{owners.map((o,index) => (
 					<option key={index}>{o}</option>
 				))}

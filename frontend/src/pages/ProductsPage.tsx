@@ -76,15 +76,16 @@ const ProductsSearchBar = ({owners, updateProducts} : {owners: string[], updateP
 	)
 };
 
-const ProductItem = ({ p, key, handleClick } :{p:Product, key:number, handleClick:VoidFunction}) => {
-	return <div className="product" key={key}>
-		<h2>{p.name}</h2>
-		<p>{p.description}</p>
-		<p>Owner: {p.owner}</p>
-		<p>Price: {p.price} GBP</p>
-		<button className='blue-button' onClick={handleClick}>Buy</button>
-	</div>
-
+const ProductItem = ({ p, handleClick } :{p:Product, handleClick:VoidFunction}) => {
+	return (
+		<div className="product">
+			<h2>{p.name}</h2>
+			<p>{p.description}</p>
+			<p>Owner: {p.owner}</p>
+			<p>Price: {p.price} GBP</p>
+			<button className='blue-button' onClick={handleClick}>Buy</button>
+		</div>
+	);
 };
 
 const ProductsContainer = ({ products } : {products: Product[]}) => {
@@ -95,7 +96,7 @@ const ProductsContainer = ({ products } : {products: Product[]}) => {
 	return (
 		<div className='products-container'>
 			{products.length > 0 ? (
-				products.map((p, index) => <ProductItem p={p} key={index} handleClick={handleBuyClick}/>)
+				products.map((p) => <ProductItem key={p._id.toString()} p={p} handleClick={handleBuyClick}/>)
 			) : (
 				<h2>No products availible</h2>
 			)}

@@ -28,11 +28,6 @@ app.use(cors());
 //   })
 // );
 
-app.get('/', (request, response) => {
-  console.log(request);
-  return response.status(234).send('Welcome To MERN Stack Tutorial');
-});
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: '0000',
@@ -41,10 +36,10 @@ app.use(session({
 }));
 
 
-app.use('/main', mainRoutes);
+app.use('/main',     mainRoutes);
 app.use('/products', productsRoutes);
-app.use('/profile', profileRoutes);
-app.use('/auth', authRoutes);
+app.use('/profile',  profileRoutes);
+app.use('/auth',     authRoutes);
 
 mongoose
   .connect(mongoDBURL)

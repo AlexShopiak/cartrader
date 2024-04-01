@@ -66,7 +66,7 @@ const ProductsSearchBar = ({owners, updateProducts} : {owners: string[], updateP
 
 			<input className='name-input' 
 				type='text' 
-				placeholder='Find by product name' 
+				placeholder='Product name' 
 				value={name} 
 				onChange={handleNameChange}>
 			</input>

@@ -2,30 +2,30 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Contact({ listing }) {
-  const [landlord, setLandlord] = useState(null);
+  const [owner, setOwner] = useState(null);
   const [message, setMessage] = useState('');
   const onChange = (e) => {
     setMessage(e.target.value);
   };
 
   useEffect(() => {
-    const fetchLandlord = async () => {
+    const fetchOwner = async () => {
       try {
         const res = await fetch(`https://cartrader-api.onrender.com/api/user/${listing.userRef}`, {credentials: 'include'});
         const data = await res.json();
-        setLandlord(data);
+        setOwner(data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchLandlord();
+    fetchOwner();
   }, [listing.userRef]);
   return (
     <>
-      {landlord && (
+      {owner && (
         <div className='flex flex-col gap-2'>
           <p>
-            Contact <span className='font-semibold'>{landlord.username}</span>{' '}
+            Contact <span className='font-semibold'>{owner.username}</span>{' '}
             for{' '}
             <span className='font-semibold'>{listing.name.toLowerCase()}</span>
           </p>
@@ -40,7 +40,7 @@ export default function Contact({ listing }) {
           ></textarea>
 
           <Link
-          to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
+          to={`mailto:${owner.email}?subject=Regarding ${listing.name}&body=${message}`}
           className='bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95'
           >
             Send Message          
